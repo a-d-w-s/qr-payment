@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/a-d-w-s/qr-payment/v/stable)](https://packagist.org/packages/a-d-w-s/qr-payment)
 [![Total Downloads](https://poser.pugx.org/a-d-w-s/qr-payment/downloads)](https://packagist.org/packages/a-d-w-s/qr-payment)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 
 Library for generating QR payments in PHP
 
@@ -10,7 +10,7 @@ Library for generating QR payments in PHP
 
 `composer require a-d-w-s/qr-payment`
 
-### Příklad QR platby
+### QR payment example
 
 ```php
 <?php

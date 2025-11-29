@@ -436,18 +436,29 @@ class QR
         $baseFontSize = 16;
         $fontSize = (int) round(($size / $baseElementSize) * $baseFontSize);
 
-        $label = !empty($this->label) ? new Label(
-            text: $this->label['text'] ?? '',
-            font: new OpenSans($fontSize),
-            alignment: $this->label['alignment'] ?? LabelAlignment::Center,
-            margin: new Margin(...($this->label['margin'] ?? [10, 10, 20, 10])),
-            textColor: new Color(...($this->label['textColor'] ?? [0, 0, 0, 0])),
-        ) : null;
+        $label = null;
+        $extraHeight = 0;
+
+        if (!empty($this->label)) {
+            $marginValues = $this->label['margin'] ?? [10, 10, 20, 10]; // [t, r, b, l]
+
+            $label = new Label(
+                text: $this->label['text'] ?? '',
+                font: new OpenSans($fontSize),
+                alignment: $this->label['alignment'] ?? LabelAlignment::Center,
+                margin: new Margin(...$marginValues),
+                textColor: new Color(...($this->label['textColor'] ?? [0, 0, 0, 0])),
+            );
+
+            $extraHeight = $marginValues[0] + $marginValues[2];
+        }
 
         $data = $writer->write($qrCode, $logo, $label)->getDataUri();
 
+        $finalHeight = $size + $extraHeight;
+
         return $htmlTag
-            ? sprintf('<img src="%s" width="%2$d" height="%2$d" alt="QR Platba" />', $data, $size)
+            ? sprintf('<img src="%s" width="%2$d" height="%3$d" alt="QR" />', $data, $size, $finalHeight)
             : $data;
     }
 
